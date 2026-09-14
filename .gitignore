@@ -1,24 +1,81 @@
-.local/
-.vscode/
+# ==========================================
+# PlatformIO / embedded build artifacts
+# ==========================================
+.pio/
+.pioenvs/
+.piolibdeps/
 pio/.pioenvs/
 pio/.piolibdeps/
-drawer/drawer.scad
-*.vcxproj
-*.filters
-iSpindel/Debug/
-iSpindel/__vm/
-.pioenvs
-.piolibdeps
-.pio
-.vscode
-.vscode/c_cpp_properties.json
-.vscode/launch.json
-.vscode/.browse.c_cpp.db*
+
+# Generated build/debug directories
+Debug/
+Release/
+**/Debug/
+**/Release/
+__vm/
+**/__vm/
+
+# ==========================================
+# Secrets / credentials
+# ==========================================
+pio/src/secrets.h
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+.env
+.env.*
+!.env.example
+
+# ==========================================
+# VS Code / IDE local configuration
+# ==========================================
+.vscode/
+.idea/
+.settings/
+.project
+.cproject
+*.code-workspace
+
+# C/C++ editor-generated metadata
 .clang_complete
 .gcc-flags.json
-.cproject
-.project
-.settings
-pio/src/secrets.h
-/.idea/
-/Gemfile.lock
+*.vcxproj
+*.filters
+*.browse.c_cpp.db*
+
+# ==========================================
+# OS / temporary files
+# ==========================================
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+*.tmp
+*.temp
+
+# ==========================================
+# Python helper scripts / caches
+# ==========================================
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# ==========================================
+# Ruby / Jekyll local dependencies
+# ==========================================
+Gemfile.lock
+.bundle/
+vendor/bundle/
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# ==========================================
+# Project-specific generated/local files
+# ==========================================
+.local/
+drawer/drawer.scad
