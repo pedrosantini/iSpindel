@@ -24,7 +24,7 @@ jobs:
     - name: Get versionname 
       id: get-ver
       run: |
-        echo "ver_name=$(git describe --tags)" >> "$GITHUB_OUTPUT"
+        echo "ver_name=$(git describe --tags --always)" >> "$GITHUB_OUTPUT"
     - name: Print version
       run: |
         echo ${{ steps.get-ver.outputs.ver_name }}
