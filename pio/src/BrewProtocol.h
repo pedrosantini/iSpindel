@@ -1,9 +1,12 @@
 #pragma once
 #include <stdint.h>
+#include <stddef.h>
 
 constexpr uint32_t BREW_MAGIC = 0x42525731;
 constexpr uint8_t BREW_VERSION = 1;
-constexpr uint8_t BREW_CHANNEL = 6;
+constexpr uint16_t BREW_HTTP_PORT = 80;
+constexpr char BREW_HTTP_PATH[] = "/ispindel";
+constexpr size_t BREW_HTTP_BODY_MAX = 512;
 
 enum BrewType : uint8_t {
     BREW_TELEMETRY = 1,

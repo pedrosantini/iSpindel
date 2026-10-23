@@ -26,7 +26,7 @@ All rights reserverd by S.Lang <universam@web.de>
 #include <ESP8266WiFi.h> //https://github.com/esp8266/Arduino
 #include <FS.h>          //this needs to be first
 #include <LittleFS.h>
-#include "BrewEspNow.h"
+#include "BrewWifi.h"
 // !DEBUG 1
 
 // definitions go here
@@ -231,15 +231,12 @@ bool readConfig()
 }
 
 bool shouldStartConfig(bool validConf) {
-  const uint8_t reason = ESP.getResetInfoPtr()->reason;
-
-  const bool manualStart =
-    reason == REASON_DEFAULT_RST ||
-    reason == REASON_EXT_SYS_RST;
-
   const bool doubleReset = drd.detectDoubleReset();
 
-  return !validConf || manualStart || doubleReset;
+  // No fluxo Wi-Fi/HTTP, ligar/resetar com configuracao valida deve transmitir.
+  // O portal Wi-Fi bloqueia o envio por ate PORTALTIMEOUT (300 s); ele fica
+  // reservado ao duplo reset ou a uma configuracao ausente/invalida.
+  return !validConf || doubleReset;
 }
 
 void validateInput(const char *input, char *output)
@@ -419,6 +416,8 @@ bool startConfiguration()
   if (shouldSaveConfig)
   {
     // Wifi config
+    myData.ssid = WiFi.SSID();
+    myData.psk = WiFi.psk();
     WiFi.setAutoConnect(true);
     WiFi.setAutoReconnect(true);
 
@@ -1350,14 +1349,13 @@ void setup()
   // CONSOLE(F("\tcorrGravity: "));
   // CONSOLELN(corrGravity);
 
-  // Intervalo curto apenas para o teste de bancada.
-  myData.sleeptime = 10;
-
   brewSendReading(
     Temperatur,
     Tilt,
     Gravity,
-    Volt
+    Volt,
+    myData.ssid.c_str(),
+    myData.psk.c_str()
   );
 
   // survive - 60min sleep time

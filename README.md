@@ -1,5 +1,14 @@
 # iSpindel - *DIY electronic Hydrometer*
 
+## Firmware deste projeto: Beer Monitor
+
+O envio ativo usa HTTP/JSON com confirmacao de recebimento para o SoftAP do ESP32. Configure no
+portal do iSpindel o SSID/senha **do ESP32**, substituindo a antiga rede
+externa. O intervalo salvo no portal e respeitado. Consulte a
+[configuracao, compilacao e testes do modo hibrido](../../beer_monitor/UBIDOTS.md).
+
+A documentacao original do iSpindel continua abaixo.
+
 **[www.ispindel.de](http://www.ispindel.de)**
 
 ***
